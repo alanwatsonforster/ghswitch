@@ -1,0 +1,49 @@
+#!/bin/sh
+
+program="$(basename "$0")"
+
+usageerror () {
+  echo 1>&2 "usage: $program account [name email]"
+  exit 1
+}
+
+case $# in
+1)
+  account="$1"
+  name=""
+  email=""
+  ;;
+3)
+  account="$1"
+  name="$2"
+  email="$3"
+  ;;
+*)
+  usageerror
+  ;;
+esac
+
+if ! git rev-parse --is-inside-work-tree 1>&- 2>&-
+then
+  echo 1>&2 "error: the current directory is not in a git repository." 
+  exit 1
+fi
+
+if test ! -z "$name" && test "$(git config --local --get user.name)" != "$name"
+then
+  git config --local user.name "$name" 
+fi
+
+if test ! -z "$email" && test "$(git config --local --get user.email)" != "$email"
+then
+  git config --local user.email "$email"
+fi
+
+if gh auth status | grep "Logged in to github.com account $account"
+then
+  gh auth switch --user $account
+else
+  gh auth login -p https -w
+fi
+
+exit 0
