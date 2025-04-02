@@ -1,21 +1,21 @@
 # ghswitch: Managing GitHub Identities
 
-The `ghswitch` program facilitates for switching between accounts on [GitHub](https://github.com). I use it for switching between my home and work accounts when I start working in a repository.
+The `ghswitch` program facilitates for switching between accounts on [GitHub](https://github.com). I use it for switching between my home and work accounts as appropriate when I start working in a repository.
 
-It:
+The program:
 
 - Switches or authenticates with the specified account on GitHub.
 - Optionally, sets the name and email address in the local git configuration.
 
 ## Use
 
-When you start working in a repository, run `ghswitch` with appropriate arguments. For example, to switch to my home account, I use:
+When you start working in a repository, run `ghswitch` with appropriate arguments. For example, to switch to my home account, I can use:
 
     ghswitch alanwatsonforster "Alan Watson Forster" "68709385+alanwatsonforster@users.noreply.github.com"
 
-If you do not want to set the name and email address, omit the second and third arguments.
+If you do not want to set the name and email address (or if you have already set them), you can omit the second and third arguments.
 
-You may want to configure shell scripts or shell aliases for your different accounts to avoid having to remember the arguments. I have an shell script `ghswitch-home` for my home account and another `ghswitch-work` for my work account. My `ghswitch-home` script is just:
+You may want to configure shell scripts or shell aliases for your different accounts to avoid having to remember the arguments. I have a shell script `ghswitch-home` for my home account and another `ghswitch-work` for my work account. My `ghswitch-home` script is just:
 
     #!/bin/sh
 
